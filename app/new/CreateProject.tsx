@@ -8,7 +8,23 @@ import React, { useState } from "react";
 import { PlaceholdersAndVanishInput } from "@/components/ui/placeholders-and-vanish-input";
 import { ShineBorder } from "@/components/magicui/shine-border";
 import TooltipCredits from "../components/creditsButton";
-const CreateProject = ({ user, credits }: { user: string | null ; credits: number}) => {
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { useRouter } from "next/navigation";
+import { createVideo } from "../actions/create";
+const CreateProject = ({
+  user,
+  credits,
+}: {
+  user: string | null;
+  credits: number;
+}) => {
   const placeholders = [
     "What's the first rule of Fight Club?",
     "Who is Tyler Durden?",
@@ -16,7 +32,10 @@ const CreateProject = ({ user, credits }: { user: string | null ; credits: numbe
     "Write a Javascript method to reverse a string",
     "How to assemble your own PC?",
   ];
+  const router = useRouter();
   const [prompt, setPrompt] = useState("");
+  const [showLoginDialog, setShowLoginDialog] = useState(false);
+  const [showCreditsDialog, setShowCreditsDialog] = useState(false);
   return (
     <div className="w-screen h-screen flex flex-col">
       {!user && (
@@ -57,9 +76,70 @@ const CreateProject = ({ user, credits }: { user: string | null ; credits: numbe
           <PlaceholdersAndVanishInput
             placeholders={placeholders}
             onChange={(e) => setPrompt(e.target.value)}
-            onSubmit={(e) => {}}
+            onSubmit={(e) => {
+              e.preventDefault();
+              if (!user) {
+                return setTimeout(() => setShowLoginDialog(true), 700);
+              }
+              if (credits < 1) {
+                return setTimeout(() => setShowCreditsDialog(true), 700);
+              }
+              createVideo(prompt)
+            }}
           />
         </div>
+        <Dialog open={showLoginDialog} onOpenChange={setShowLoginDialog}>
+          <DialogContent className="sm-max-w-[425px]">
+            <DialogHeader>
+              <DialogTitle>Hello There!</DialogTitle>
+              <DialogDescription>
+                Please sing in to create videos
+              </DialogDescription>
+            </DialogHeader>
+            <DialogFooter>
+              <SignInButton>
+                <Button className="bg-black border border-gray-400 text-white  rounded-full mx-2 hover:bg-gray-900 transitioncolors duration-150  cursor-pointer">
+                  Sign In
+                </Button>
+              </SignInButton>
+              <SignUpButton>
+                <Button className="bg-gradient-to-br hover:opacity-80 text-white rounded-full from-[#3352CC] to-[#1C2D70] font-medium cursor-pointer">
+                  Sign up
+                </Button>
+              </SignUpButton>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
+        <Dialog open={showCreditsDialog} onOpenChange={setShowCreditsDialog}>
+          <DialogContent className="sm:max-w-[425px]">
+            <DialogHeader>
+              <DialogTitle>
+                <div className="text-red-500">Out of credits</div>
+              </DialogTitle>
+              <DialogDescription>
+                Please add some credits to create videos
+              </DialogDescription>
+            </DialogHeader>
+            <DialogFooter>
+              <Button
+                className="bg-gradient-to-br hover:opacity-80 text-white rounded-full from-[#3352CC] to-[#1C2D70] font-medium cursor-pointer"
+                onClick={() => {
+                  router.push("/pricing");
+                  setShowCreditsDialog(false);
+                }}
+              >
+                Go to pricing
+              </Button>
+              <Button
+                variant="outline"
+                className="rounded-full cursor-pointer"
+                onClick={() => setShowCreditsDialog(false)}
+              >
+                Close
+              </Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
       </div>
     </div>
   );
