@@ -5,10 +5,9 @@ import { generateImages } from "./image";
 import { generateAudio } from "./audio";
 import { generateCaptions } from "./captions";
 import { videoDuration } from "../lib/duration";
-import { renderVideo } from "./render";
+// import { renderVideo } from "./render";
 import { findPrompt } from "../lib/findPrompt";
 import { generateScript } from "./script";
-import { log } from "console";
 
 export const processes = async (videoId: string) => {
   try {
@@ -23,7 +22,6 @@ export const processes = async (videoId: string) => {
       (data: { imagePrompt: string }) => data.imagePrompt
     );
 
-
     await prisma.video.update({
       where: {
         videoId: videoId,
@@ -34,13 +32,14 @@ export const processes = async (videoId: string) => {
       },
     });
 
+
     const imagesPromise = generateImages(videoId);
     await generateAudio(videoId);
     await generateCaptions(videoId);
     await imagesPromise;
     await videoDuration(videoId);
 
-    await renderVideo(videoId);
+    // await renderVideo(videoId);
   } catch (error) {
     console.error("error in making video:", error);
     throw error;

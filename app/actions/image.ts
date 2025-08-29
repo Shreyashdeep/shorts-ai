@@ -1,7 +1,7 @@
 import { prisma } from "../lib/db"
 import Replicate from "replicate"
-// import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3"
-// import { randomUUID } from "crypto";
+import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3"
+import { randomUUID } from "crypto";
 
 interface ReplicateOutput {
     url: () => URL;
@@ -11,15 +11,15 @@ const replicate = new Replicate({
     auth: process.env.REPLICATE_API_TOKEN
 })
 
-// const s3Client = new S3Client({
-//     region: process.env.AWS_REGION || '',
-//     credentials: {
-//         accessKeyId: process.env.AWS_ACCESS_KEY_ID || '',
-//         secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY || '',
-//     }
-// })
+const s3Client = new S3Client({
+    region: process.env.AWS_REGION || '',
+    credentials: {
+        accessKeyId: process.env.AWS_ACCESS_KEY_ID || '',
+        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY || '',
+    }
+})
 
-// const bucketName = process.env.S3_BUCKET_NAME
+const bucketName = process.env.S3_BUCKET_NAME
 
 const processImage = async (img: string) => {
     try {
@@ -34,21 +34,21 @@ const processImage = async (img: string) => {
         const image = output.url()
         const imageUrl = image.href
         const response = await fetch(imageUrl)
-        // const arrayBuffer = await response.arrayBuffer()
-        // const buffer = Buffer.from(arrayBuffer)
+        const arrayBuffer = await response.arrayBuffer()
+        const buffer = Buffer.from(arrayBuffer)
 
-        // const fileName = `${randomUUID()}.png`
+        const fileName = `${randomUUID()}.png`
 
-        // const command = new PutObjectCommand({
-        //     Bucket: bucketName,
-        //     Key: fileName,
-        //     Body: buffer,
-        //     ContentType: "image/png",
-        // })
+        const command = new PutObjectCommand({
+            Bucket: bucketName,
+            Key: fileName,
+            Body: buffer,
+            ContentType: "image/png",
+        })
 
-        // await s3Client.send(command)
-        // const s3Url = `https://${bucketName}.s3.${process.env.AWS_REGION}.amazonaws.com/${fileName}`
-        // return s3Url
+        await s3Client.send(command)
+        const s3Url = `https://${bucketName}.s3.${process.env.AWS_REGION}.amazonaws.com/${fileName}`
+        return s3Url
     }
     catch (error) {
         console.error('error while generating image from replicate', error)
@@ -92,6 +92,10 @@ export const generateImages = async (videoId: string) => {
                 thumbnail: imageLinks[0]
             }
         })
+
+        // const response = await processImage('Leo messi celebrating his 8th ballondor')
+        // console.log(response);
+        
 
     }
     catch (error) {

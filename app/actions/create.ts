@@ -7,6 +7,7 @@ import { prisma } from "../lib/db"
 // import { videoQueue } from "../lib/queue"
 import { redirect } from "next/navigation"
 import { decreaseCredits } from "../lib/decreaseCredits"
+import { processes } from "./processes"
 
 
 export const createVideo = async (prompt: string) => {
@@ -34,5 +35,6 @@ export const createVideo = async (prompt: string) => {
     // console.log('job added to queue succesffuly')
 
     // return { videoId }
+    processes(videoId)
 
 }
