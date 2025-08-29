@@ -5,6 +5,7 @@ import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3"
 
 const client = new ElevenLabsClient({ apiKey: process.env.ELEVENLABS_API_KEY });
 
+
 const s3Client = new S3Client({
     region: process.env.AWS_REGION || '',
     credentials: {
@@ -41,6 +42,7 @@ export const generateAudio = async (videoId: string) => {
         }
 
         const audioBuffer = Buffer.concat(chunks)
+        
         const fileName = `${randomUUID()}.mp3`
 
         const command = new PutObjectCommand({
