@@ -5,7 +5,7 @@ import { generateScript } from "./script"
 import { generateAudio } from "./audio"
 import { generateCaptions } from "./captions"
 import { videoDuration } from "../lib/duration"
-// import { renderVideo } from "./render"
+import { renderVideo } from "./render"
 
 export const processes = async (videoId: string) => {
     try {
@@ -32,7 +32,7 @@ export const processes = async (videoId: string) => {
         await imagesPromise;
         await videoDuration(videoId)
 
-        // await renderVideo(videoId)
+        await renderVideo(videoId)
 
 
 

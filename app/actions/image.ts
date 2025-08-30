@@ -82,11 +82,12 @@ export const generateImages = async (videoId: string) => {
     //     'https://shorts699.s3.eu-north-1.amazonaws.com/4fbb42f2-917f-4cae-8409-70091b43e272.png'
     // ]
     const imageLinks = [
-      "https://ai-shorts69.s3.us-east-1.amazonaws.com/c6fc87ac-c490-4f57-b4aa-6fc5f878f047.png",
-      "https://ai-shorts69.s3.us-east-1.amazonaws.com/b3106743-1c44-4d48-bd38-37792ad580b3.png",
-      "https://ai-shorts69.s3.us-east-1.amazonaws.com/9fd5d01b-627f-4b50-bf79-13904a2b423c.png",
-      "https://ai-shorts69.s3.us-east-1.amazonaws.com/da807202-402c-4139-9deb-217278bdcf29.png",
-      "https://ai-shorts69.s3.us-east-1.amazonaws.com/c0f28960-f7dc-4cda-baa2-2ce52d6be56e.png",
+        'https://ai-shorts69.s3.us-east-1.amazonaws.com/80d7de49-7595-42ca-a770-c6cf6398f719.png',
+        'https://ai-shorts69.s3.us-east-1.amazonaws.com/7f35d701-86dd-423b-9ae7-002493fff57c.png',
+        'https://ai-shorts69.s3.us-east-1.amazonaws.com/a5c2be8c-32c4-4a56-a61b-8aefe205581c.png',
+        'https://ai-shorts69.s3.us-east-1.amazonaws.com/aa5242c2-5616-4445-8c47-3c077a796235.png',
+        'https://ai-shorts69.s3.us-east-1.amazonaws.com/77253c06-bf7d-431a-9b5a-1c825e264cee.png',
+        'https://ai-shorts69.s3.us-east-1.amazonaws.com/4267e1c4-9a97-4e47-9447-b1428e52ae98.png'
     ];
 
     console.log(imageLinks);
