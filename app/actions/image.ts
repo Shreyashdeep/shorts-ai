@@ -59,18 +59,18 @@ const processImage = async (img: string) => {
 
 export const generateImages = async (videoId: string) => {
   try {
-    // const video = await prisma.video.findUnique({
-    //   where: {
-    //     videoId: videoId,
-    //   },
-    // });
-    // if (!video) {
-    //   return null;
-    // }
+    const video = await prisma.video.findUnique({
+      where: {
+        videoId: videoId,
+      },
+    });
+    if (!video) {
+      return null;
+    }
 
-    // const imagePromises = video.imagePrompts.map((img) => processImage(img));
+    const imagePromises = video.imagePrompts.map((img) => processImage(img));
 
-    // const imageLinks = await Promise.all(imagePromises)
+    const imageLinks = await Promise.all(imagePromises)
 
     // const imageLinks = [
     //     'https://shorts699.s3.eu-north-1.amazonaws.com/e8b6b1a2-ce75-4b2c-8c10-2f05c49e5782.png',
@@ -81,14 +81,14 @@ export const generateImages = async (videoId: string) => {
     //     'https://shorts699.s3.eu-north-1.amazonaws.com/635dbdf6-147b-42db-90cd-5f9586411082.png',
     //     'https://shorts699.s3.eu-north-1.amazonaws.com/4fbb42f2-917f-4cae-8409-70091b43e272.png'
     // ]
-    const imageLinks = [
-        'https://ai-shorts69.s3.us-east-1.amazonaws.com/80d7de49-7595-42ca-a770-c6cf6398f719.png',
-        'https://ai-shorts69.s3.us-east-1.amazonaws.com/7f35d701-86dd-423b-9ae7-002493fff57c.png',
-        'https://ai-shorts69.s3.us-east-1.amazonaws.com/a5c2be8c-32c4-4a56-a61b-8aefe205581c.png',
-        'https://ai-shorts69.s3.us-east-1.amazonaws.com/aa5242c2-5616-4445-8c47-3c077a796235.png',
-        'https://ai-shorts69.s3.us-east-1.amazonaws.com/77253c06-bf7d-431a-9b5a-1c825e264cee.png',
-        'https://ai-shorts69.s3.us-east-1.amazonaws.com/4267e1c4-9a97-4e47-9447-b1428e52ae98.png'
-    ];
+    // const imageLinks = [
+    //     'https://ai-shorts69.s3.us-east-1.amazonaws.com/80d7de49-7595-42ca-a770-c6cf6398f719.png',
+    //     'https://ai-shorts69.s3.us-east-1.amazonaws.com/7f35d701-86dd-423b-9ae7-002493fff57c.png',
+    //     'https://ai-shorts69.s3.us-east-1.amazonaws.com/a5c2be8c-32c4-4a56-a61b-8aefe205581c.png',
+    //     'https://ai-shorts69.s3.us-east-1.amazonaws.com/aa5242c2-5616-4445-8c47-3c077a796235.png',
+    //     'https://ai-shorts69.s3.us-east-1.amazonaws.com/77253c06-bf7d-431a-9b5a-1c825e264cee.png',
+    //     'https://ai-shorts69.s3.us-east-1.amazonaws.com/4267e1c4-9a97-4e47-9447-b1428e52ae98.png'
+    // ];
 
     console.log(imageLinks);
     await prisma.video.update({
