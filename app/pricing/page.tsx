@@ -1,9 +1,81 @@
-import React from 'react'
+"use client";
+import { Button } from "@/components/ui/button";
+import React from "react";
 
-const page = () => {
+const PricingPage = () => {
+  const plans = [
+    {
+      name: "Starter",
+      price: "$1",
+      features: ["1 video"],
+    },
+    {
+      name: "Pro",
+      price: "$20",
+      features: ["20 videos"],
+      popular: true,
+    },
+    {
+      name: "Enterprise",
+      price: "$99",
+      features: ["150 videos"],
+    },
+  ];
   return (
-    <div>In pricing page</div>
-  )
-}
+    <div className="min-h-screen py-12 px-4">
+      <div className="max-w-6xl mx-auto text-center">
+        <h2 className="text-4xl font-bold text-gray-100 mb-4">
+          Simple, transparent pricing
+        </h2>
+        <p className="text-xl text-gray-600 mb-12">
+          Choose the plan that fits your needs
+        </p>
+        <div className="grid grid-cols-3 gap-8">
+          {plans.map((plan) => (
+            <div
+              key={plan.name}
+              className={`bg-white rounded-lg p-6 relative ${
+                plan.popular ? "ring-2 ring-blue-500" : ""
+              }`}
+            >
+              {plan.popular && (
+                <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-gradient-to-br text-white from-[#3352CC] to-[#1C2D70] px-4 py-1 rounded-full text-sm font-medium">
+                  Most Popular
+                </div>
+              )}
+              <h3 className="text-2xl font-bold text-gray-900">{plan.name}</h3>
 
-export default page
+              <div className="my-4">
+                <span className="text-4xl font-bold text-gray-900">
+                  {plan.price}
+                </span>
+                <span className="text-gray-500">/one-time</span>
+              </div>
+
+              <ul className="space-y-3 mb-8">
+                {plan.features.map((feature, i) => (
+                  <li key={i} className="flex items-center">
+                    <span className="text-blue-500 mr-3">✔</span>
+                    <span className="text-gray-700">{feature}</span>
+                  </li>
+                ))}
+              </ul>
+              <Button
+                onClick={() => handleSubscription(plan.priceId)}
+                className={`w-full ${
+                  plan.popular
+                    ? "bg-gradient-to-br hover:opacity-80 text-white rounded-full from-[#3352CC] to-[#1C2D70] font-medium cursor-pointer"
+                    : "bg-gray-800 hover:bg-gray-900 text-white cursor-pointer"
+                }`}
+              >
+                {plan.popular ? "Sign up" : "GetStarted"}
+              </Button>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default PricingPage;
