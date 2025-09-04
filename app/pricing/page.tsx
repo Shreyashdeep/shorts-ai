@@ -3,22 +3,36 @@ import { Button } from "@/components/ui/button";
 import React from "react";
 
 const PricingPage = () => {
+  const handleSubscription = async (priceId: string) => {
+    const res=  await fetch('/api/stripe/checkout',{
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({priceId})
+    }) 
+    const data= await res.json()
+    if(data.url){
+      window.location.href= data.url
+    }
+  }
   const plans = [
     {
       name: "Starter",
       price: "$1",
       features: ["1 video"],
+      priceId: ''
     },
     {
       name: "Pro",
       price: "$20",
       features: ["20 videos"],
       popular: true,
+      priceId: ''
     },
     {
       name: "Enterprise",
       price: "$99",
       features: ["150 videos"],
+      priceId: ''
     },
   ];
   return (
