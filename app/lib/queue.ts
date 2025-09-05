@@ -1,18 +1,25 @@
-import {Queue} from 'bullmq'
-import Redis from 'ioredis'
+import { Queue } from "bullmq";
+import Redis from "ioredis";
 
-const connection= new Redis({
-    host: process.env.UPSTASH_REDIS_HOST,
-    port: 6379,
-    password: process.env.UPSTASH_REDIS_PASSWORD,
-    tls: {},
+const connection = new Redis(
+  "redis://default:AfKUAAIncDE3NDhhNjFmZTFkNzQ0OTg4YjIwZTI4MDAwMGMzMjc0ZXAxNjIxMDA@select-stallion-62100.upstash.io:6379",
+  {
     maxRetriesPerRequest: null,
-})
-
-export const videoQueue = new Queue('video', {
-    connection,
-    defaultJobOptions: {
-        removeOnComplete: 10,
-        removeOnFail: 10,
-    }
-})
+  }
+);
+connection.on("connect", () => {
+  console.log("Redis connected successfully");
+});
+connection.on("error", (err) => {
+  console.log("Redis connection error: ", err);
+});
+connection.on("ready", () => {
+  console.log("Redis is ready");
+});
+export const videoQueue = new Queue("video", {
+  connection,
+  defaultJobOptions: {
+    removeOnComplete: 10,
+    removeOnFail: 10,
+  },
+});

@@ -26,6 +26,7 @@
     "@remotion/cli": "^4.0.340",
     "@remotion/lambda": "4.0.340",
     "@remotion/player": "4.0.340",
+    "@tabler/icons-react": "^3.34.1",
     "@tsparticles/engine": "^3.9.1",
     "@tsparticles/react": "^3.0.0",
     "@tsparticles/slim": "^3.9.1",
