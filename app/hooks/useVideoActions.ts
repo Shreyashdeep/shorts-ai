@@ -46,7 +46,7 @@ export const useVideoActions = ({ videoId, videoUrl, onDeleteSuccess }: UseVideo
         } catch (error) {
             console.error('download error:', error)
             toast.error('Download failed', {
-                description: "unable to download video.please try again bitch"
+                description: "unable to download video.please try again. Damn!"
             })
         }
     }

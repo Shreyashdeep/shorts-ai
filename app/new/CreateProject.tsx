@@ -137,10 +137,10 @@ const CreateProject = ({
             onSubmit={(e) => {
               e.preventDefault();
               if (!user) {
-                return setTimeout(() => setShowLoginDialog(true), 700);
+                return setTimeout(() => setShowLoginDialog(true), 1000);
               }
               if (credits < 1) {
-                return setTimeout(() => setShowCreditsDialog(true), 700);
+                return setTimeout(() => setShowCreditsDialog(true), 1000);
               }
               setTimeout(() => handleCreateVideo(), 1000);
             }}
