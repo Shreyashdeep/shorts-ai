@@ -5,7 +5,7 @@ import { prisma } from "@/app/lib/db";
 
 
 const connection = new Redis(
-  "redis://default:AfKUAAIncDE3NDhhNjFmZTFkNzQ0OTg4YjIwZTI4MDAwMGMzMjc0ZXAxNjIxMDA@select-stallion-62100.upstash.io:6379",
+  "rediss://default:AfKUAAIncDE3NDhhNjFmZTFkNzQ0OTg4YjIwZTI4MDAwMGMzMjc0ZXAxNjIxMDA@select-stallion-62100.upstash.io:6379",
   {
     maxRetriesPerRequest: null,
   }
