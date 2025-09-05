@@ -19,20 +19,20 @@ const PricingPage = () => {
       name: "Starter",
       price: "$1",
       features: ["1 video"],
-      priceId: ''
+      priceId: 'price_1S3fAqIIFu7VuDQAoetU0U6q'
     },
     {
       name: "Pro",
       price: "$20",
       features: ["20 videos"],
       popular: true,
-      priceId: ''
+      priceId: 'price_1S3fAqIIFu7VuDQAffq4qTxs'
     },
     {
       name: "Enterprise",
       price: "$99",
       features: ["150 videos"],
-      priceId: ''
+      priceId: 'price_1S3fAqIIFu7VuDQA8bBfoXbV'
     },
   ];
   return (
