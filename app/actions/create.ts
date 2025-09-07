@@ -3,12 +3,10 @@
 import { currentUser } from "@clerk/nextjs/server"
 import { randomUUID } from "crypto"
 import { prisma } from "../lib/db"
-
-// import { videoQueue } from "../lib/queue"
-import { redirect } from "next/navigation"
 import { decreaseCredits } from "../lib/decreaseCredits"
-import { processes } from "./processes"
 import { videoQueue } from "../lib/queue"
+import { redirect } from "next/navigation"
+import { processes } from "./processes"
 
 
 export const createVideo = async (prompt: string) => {
@@ -32,11 +30,11 @@ export const createVideo = async (prompt: string) => {
     await decreaseCredits(userId)
 
 
-    await videoQueue.add('generate-video', { videoId })
-    console.log('job added to queue succesffuly')
+    // await videoQueue.add('generate-video', { videoId })
+    // console.log('job added to queue succesffuly')
 
-    return { videoId }
-    // processes(videoId)
+    // return { videoId }
+    processes(videoId)
     // redirect(`/video/${videoId}`)
 
 }

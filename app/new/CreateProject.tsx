@@ -53,40 +53,40 @@ const CreateProject = ({
   const [showLoginDialog, setShowLoginDialog] = useState(false);
   const [showCreditsDialog, setShowCreditsDialog] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const handleCreateVideo = async () => {
-    setIsLoading(true);
+  // const handleCreateVideo = async () => {
+  //   setIsLoading(true);
 
-    try {
-      const result = await createVideo(prompt);
+  //   try {
+  //     const result = await createVideo(prompt);
 
-      if (result?.videoId) {
-        const pollInterval = setInterval(async () => {
-          try {
-            const response = await fetch(`/api/video-status/${result.videoId}`);
-            const data = await response.json();
+  //     if (result?.videoId) {
+  //       const pollInterval = setInterval(async () => {
+  //         try {
+  //           const response = await fetch(`/api/video-status/${result.videoId}`);
+  //           const data = await response.json();
 
-            if (data.completed) {
-              clearInterval(pollInterval);
-              router.replace(`/videos/${result.videoId}`);
-            } else if (data.failed) {
-              clearInterval(pollInterval);
-              setIsLoading(false);
-              alert("video generating failed");
-            }
-          } catch (error) {
-            console.log("still processing....");
-          }
-        }, 5000);
-      } else {
-        setIsLoading(false);
-        alert("failed to creating video");
-      }
-    } catch (error) {
-      setIsLoading(false);
-      console.log("failed to creating video");
-      alert("failed to creating video");
-    }
-  };
+  //           if (data.completed) {
+  //             clearInterval(pollInterval);
+  //             router.replace(`/videos/${result.videoId}`);
+  //           } else if (data.failed) {
+  //             clearInterval(pollInterval);
+  //             setIsLoading(false);
+  //             alert("video generating failed");
+  //           }
+  //         } catch (error) {
+  //           console.log("still processing....");
+  //         }
+  //       }, 5000);
+  //     } else {
+  //       setIsLoading(false);
+  //       alert("failed to creating video");
+  //     }
+  //   } catch (error) {
+  //     setIsLoading(false);
+  //     console.log("failed to creating video");
+  //     alert("failed to creating video");
+  //   }
+  // };
   return (
     <div className="w-screen h-screen flex flex-col">
       {!user && (
@@ -113,13 +113,13 @@ const CreateProject = ({
           </Link>
         </div>
       )}
-      <Loader
+      {/* <Loader
         key={isLoading ? "loading" : "idle"}
         loadingStates={loadingStates}
         loading={isLoading}
         duration={10000}
         loop={false}
-      />
+      /> */}
 
       <h1 className="text-4xl md:text-4xl lg:text-6xl font-semibold max-w-7xl mx-auto text-center mt-6 relative z-20 py-6 bg-clip-text text-transparent bg-gradient-to-b from-neutral-800 via-neutral-700 to-neutral-700 dark:from-neutral-800 dark:via-white dark:to-white">
         Generate realistic shorts <div className="h-6"></div>{" "}
@@ -142,7 +142,8 @@ const CreateProject = ({
               if (credits < 1) {
                 return setTimeout(() => setShowCreditsDialog(true), 1000);
               }
-              setTimeout(() => handleCreateVideo(), 1000);
+              // setTimeout(() => handleCreateVideo(), 1000);
+              createVideo(prompt);
             }}
           />
         </div>

@@ -1,10 +1,9 @@
 import { randomUUID } from "crypto";
 import { prisma } from "../lib/db"
-import { ElevenLabsClient } from "elevenlabs"
+import { ElevenLabsClient } from "elevenlabs";
 import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3"
 
-const client = new ElevenLabsClient({ apiKey: process.env.ELEVENLABS_API_KEY });
-
+const client = new ElevenLabsClient({ apiKey: process.env.ELEVENLABS_API_KE });
 
 const s3Client = new S3Client({
     region: process.env.AWS_REGION || '',
@@ -42,7 +41,6 @@ export const generateAudio = async (videoId: string) => {
         }
 
         const audioBuffer = Buffer.concat(chunks)
-        
         const fileName = `${randomUUID()}.mp3`
 
         const command = new PutObjectCommand({
