@@ -1,36 +1,35 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+✨ Features
+shorts-ai automates content creation, from initial scripting to final, rendered video output, saving you hours of manual production time.
 
-## Getting Started
+🎬 Content Ingestion: Accepts input from users.
 
-First, run the development server:
+🧠 AI Core: Leverages ChatGPT for intelligent content summarization and script generation.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+🗣️ Professional Voiceovers: Integrates ElevenLabs for generating natural, high-quality Text-to-Speech audio.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+💬 Automated Captions: Uses AssemblyAI to transcribe and generate accurate, stylized captions.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+⚛️ Programmatic Video Editing: Renders videos entirely in the cloud using Remotion, allowing for complex, dynamic video graphics and layouts with React.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+☁️ Serverless Processing: Utilizes AWS Lambda for efficient, scalable, and cost-effective handling of heavy video rendering and processing tasks.
 
-## Learn More
+🔒 Secure Authentication: Manages user sign-ups and sign-ins via Clerk.
 
-To learn more about Next.js, take a look at the following resources:
+🔗 Cloud Storage: Stores all source and rendered video assets securely on Amazon S3.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+⚙️ Tech Stack & Architecture
+This project is a modern, high-performance application built on a robust set of technologies, separating the front-end, back-end, and processing layers for maximum scalability.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Layer	Technology	Purpose
+Frontend	Next.js (App Router), TypeScript, Tailwind CSS	Fast, responsive UI and design system.
+Backend/API	Next.js API Routes, Prisma (ORM), TypeScript	Handles application logic, database access, and job queuing.
+Database	Prisma (ORM), PostgreSQL/MySQL	Type-safe, high-performance database management.
+Authentication	Clerk	Secure user management and authentication.
+AI/ML	ChatGPT, Video Model (Inferred)	Scripting, summarization, and content intelligence.
+Microservices	AWS Lambda	Serverless execution for heavy tasks like video generation.
+Audio/Captions	ElevenLabs, AssemblyAI	Voiceover generation and accurate captioning.
+Video Rendering	Remotion	Programmatic, React-based video production.
+Storage	Amazon S3	Scalable, durable storage for all media assets.
 
-## Deploy on Vercel
+https://github.com/user-attachments/assets/337a3c75-7297-45e1-b9c5-8bdefa905d4c
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
